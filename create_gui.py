@@ -21,7 +21,7 @@ class MlApp(QWidget):
         self.layout.addWidget(self.button)
 
         self.submit_button = QPushButton("Submit")
-        self.submit_button.clicked.connect(self.run_model)
+        # self.submit_button.clicked.connect()  # add functionality)
         self.layout.addWidget(self.submit_button)
 
         self.setLayout(self.layout)
@@ -47,3 +47,9 @@ class MlApp(QWidget):
         msg_box.setText(message)
         msg_box.exec_()
 
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = MlApp()
+    window.show()
+    sys.exit(app.exec_())
