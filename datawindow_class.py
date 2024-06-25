@@ -80,6 +80,8 @@ class DataWindow:
         self.labels_slice = slice(self.label_start, None)
         self.label_indices = np.arange(self.total_window_size)[self.labels_slice]
 
+        self._sample_batch = None
+
     def split_to_inputs_labels(self, features):
         """
         Splits the features into inputs and labels based on the defined window.
@@ -182,6 +184,8 @@ class DataWindow:
         ds = ds.map(self.split_to_inputs_labels)
         return ds
 
+    # Using property decorators for lazy evaluation to save memory, also for encapsulation
+
     @property
     def train(self):
         return self.make_dataset(self.train_df)
@@ -193,6 +197,8 @@ class DataWindow:
     @property
     def test(self):
         return self.make_dataset(self.test_df)
+
+    # Todo: Read about @functools.cached_property
 
     @property
     def sample_batch(self):
